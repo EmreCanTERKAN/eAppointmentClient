@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResultModel } from '../models/result.model';
 import { api } from '../constants';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient , private error: ErrorService) {}
 
   post<T>(
     apiUrl: string,
@@ -21,7 +22,10 @@ export class HttpService {
           callBack(res);
       }),
       error: (err: HttpErrorResponse) => {
-        if (errCallBack !== undefined) errCallBack(err);
+        this.error.errorHandler(err);
+        if (errCallBack !== undefined)
+           errCallBack(err);
+        
       },
     });
   }
