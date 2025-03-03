@@ -37,7 +37,7 @@ ngOnInit(): void {
   }
 
 getAll(){
-  this.http.post("Doctors/GetAll",{},(res)=>{
+  this.http.post<DoctorModel[]>("Doctors/GetAll",{},(res)=>{
     this.doctors = res.data;
   })
 }
