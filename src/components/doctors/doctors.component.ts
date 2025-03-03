@@ -18,9 +18,11 @@ export class DoctorsComponent implements OnInit {
   doctors : DoctorModel[] = [];
   departments = departments
   createModel : DoctorModel = new DoctorModel();
+  updateModel : DoctorModel = new DoctorModel();
 
   @ViewChild("addModalCloseBtn") addModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
-
+  @ViewChild("updateModalCloseBtn") updateModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
+  
   
 constructor(
   private http: HttpService,
@@ -55,5 +57,22 @@ delete(id:string, fullName:string)
       this.getAll();
     })    
   })
+}
+
+get(data:DoctorModel){
+  console.log(data);
+  
+  this.updateModel = {...data};
+  this.updateModel.departmentValue = data.departmentEnum.value;
+}
+
+update(form:NgForm){
+  if(form.valid){
+    this.http.post<string>("Doctors/Update",this.updateModel, (res) => {
+      this.swal.callToast(res.data,"success");
+      this.getAll();
+      this.updateModalCloseBtn?.nativeElement.click();
+    });
+  }
 }
 }
