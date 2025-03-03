@@ -7,22 +7,26 @@ import { departments } from '../../app/constants';
 import { FormsModule, NgForm } from '@angular/forms';
 import { FormValidateDirective } from 'form-validate-angular';
 import { SwalService } from '../../app/services/swal.service';
+import { DoctorPipe } from '../../app/pipe/doctor.pipe';
 
 @Component({
   selector: 'app-doctors',
-  imports: [CommonModule,RouterLink,FormsModule,FormValidateDirective],
+  imports: [CommonModule,RouterLink,FormsModule,FormValidateDirective, DoctorPipe],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css'
 })
 export class DoctorsComponent implements OnInit {
   doctors : DoctorModel[] = [];
   departments = departments
+
+
   createModel : DoctorModel = new DoctorModel();
   updateModel : DoctorModel = new DoctorModel();
 
   @ViewChild("addModalCloseBtn") addModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
   @ViewChild("updateModalCloseBtn") updateModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
   
+  search:string = "";
   
 constructor(
   private http: HttpService,
