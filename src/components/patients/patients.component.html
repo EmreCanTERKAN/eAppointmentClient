@@ -29,6 +29,7 @@
                 <tr>
                     <th>#</th>
                     <th>Full Name</th>
+                    <th>Identity Number</th>
                     <th>City / Town</th>
                     <th>Full Address</th>
                     <th>Operations</th>
@@ -38,8 +39,9 @@
                 
                     @for (patient of patients | patient : search; track patient) {
                     <tr>
-                        <td>{{$index+1}}</td>
+                        <td>{{$index + 1}}</td>
                         <td>{{patient.fullName}}</td>
+                        <td>{{patient.identityNumber}}</td>
                         <td>{{patient.city}} / {{patient.town}}</td>
                         <td>{{patient.fullAddress}}</td>
                         <td>
@@ -76,6 +78,12 @@
                 <div class="form-group mt-3">
                     <label>LastName</label>
                     <input type="text" [(ngModel)]="createModel.lastName" name="lastName" class="form-control" required minlength="3">
+                    <div class="invalid-feedback"></div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Identity Number</label>
+                    <input type="text" [(ngModel)]="createModel.identityNumber" name="identityNumber" class="form-control" required minlength="11" maxlength="11">
                     <div class="invalid-feedback"></div>
                 </div>
 
@@ -124,6 +132,12 @@
                 <div class="form-group mt-3">
                     <label>LastName</label>
                     <input type="text" [(ngModel)]="updateModel.lastName" name="updatefirstNamelastName" class="form-control" required minlength="3">
+                    <div class="invalid-feedback"></div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Identity Number</label>
+                    <input type="text" [(ngModel)]="updateModel.identityNumber" name="updateIdentityNumber" class="form-control" required minlength="11" maxlength="11">
                     <div class="invalid-feedback"></div>
                 </div>
 

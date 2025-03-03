@@ -37,6 +37,8 @@ ngOnInit(): void {
 
 getAll(){
   this.http.post<PatientModel[]>("Patients/GetAll",{},(res)=>{
+    console.log(res);
+    
     this.patients = res.data;
   })
 }

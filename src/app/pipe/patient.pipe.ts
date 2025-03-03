@@ -10,11 +10,11 @@ export class PatientPipe implements PipeTransform {
     if(!search)
       return value;
     return value.filter(p=> 
-      p.fullAddress.toLowerCase().includes(search.toLocaleLowerCase()) || 
+      p.fullName.toLowerCase().includes(search.toLocaleLowerCase()) || 
       p.fullAddress.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
       p.city.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
       p.town.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
-      p.ıdentityNumber.toLocaleLowerCase().includes(search.toLocaleLowerCase()) 
+      p.identityNumber.toString().includes(search)
     )
   }
 
