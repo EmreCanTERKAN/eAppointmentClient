@@ -26,11 +26,8 @@ constructor(
   private http: HttpService,
   private swal : SwalService
 ){}
-  ngOnInit(): void {
+ngOnInit(): void {
     this.getAll();
-    this.swal.callSwal("Title","text", ()=> {
-      alert("Delete is succesfull");
-    });  
   }
 
 getAll(){
@@ -48,5 +45,15 @@ add(form: NgForm){
       this.createModel = new DoctorModel();
     });
   }
+}
+
+delete(id:string, fullName:string)
+{
+  this.swal.callSwal("Delete doctor?",`You want to delete ${fullName}`,()=>{
+    this.http.post<string>("Doctors/DeleteById",{id:id},(res)=>{
+      this.swal.callToast(res.data,"info")
+      this.getAll();
+    })    
+  })
 }
 }
