@@ -98,5 +98,23 @@ create(form : NgForm){
   }
 }
 
+onAppointmentDeleted(event : any){
+  event.cancel = true;
 
+
+}
+
+onAppointmentDeleting(event : any){
+  event.cancel = true;
+
+  console.log(event);
+  
+  this.swal.callSwal("Delete appointment?",`You want to delete ${event.appointmentData.patient.fullName}`,() =>
+  {
+    this.http.post("Appointments/DeleteById", {id: event.appointmentData.id}, res=> {
+      this.swal.callToast(res.data,"info");
+      this.getAllAppointments();
+    })
+  })
+}
 }
