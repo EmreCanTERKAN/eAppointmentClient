@@ -16,7 +16,10 @@ export class ErrorService {
 
     if(err.status === 0){
       message = "API is not availeble";
-    }else if(err.status === 404){
+    }else if (err.status === 401){
+      message = "You are not authorized";
+    }
+    else if(err.status === 404){
       message = "API not found";
     }else if (err.status ===500){
       message = "";
