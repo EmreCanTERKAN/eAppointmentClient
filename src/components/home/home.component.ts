@@ -100,8 +100,6 @@ create(form : NgForm){
 
 onAppointmentDeleted(event : any){
   event.cancel = true;
-
-
 }
 
 onAppointmentDeleting(event : any){
@@ -115,6 +113,20 @@ onAppointmentDeleting(event : any){
       this.swal.callToast(res.data,"info");
       this.getAllAppointments();
     })
+  })
+}
+
+onAppointmentUpdating(event : any ){
+  event.cancel = true;
+  const data = {
+    id : event.oldData.id,
+    startDate: this.date.transform(event.newData.startDate,"dd.MM.yyy HH:mm"),
+    endDate: this.date.transform(event.newData.endDate,"dd.MM.yyy HH:mm"),
+  }
+  console.log(data);
+  this.http.post<string>("Appointments/Update", data, res => {
+    this.swal.callToast(res.data);
+    this.getAllAppointments();
   })
 }
 }
