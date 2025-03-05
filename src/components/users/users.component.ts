@@ -34,13 +34,21 @@ export class UsersComponent {
   ){}
   ngOnInit(): void {
       this.getAll();
+      this.getAllRoles();
     }
   
   getAll(){
     this.http.post<UserModel[]>("Users/GetAll",{},(res)=>{
-      console.log(res);
       
       this.users = res.data;
+    })
+  }
+
+  getAllRoles(){
+    this.http.post<RoleModel[]>("Users/GetAllRoles",{}, (res) => {
+      console.log(res);
+      
+      this.roles = res.data;
     })
   }
   

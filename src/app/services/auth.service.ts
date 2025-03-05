@@ -30,6 +30,7 @@ export class AuthService {
       this.tokenDeCode.name = decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
       this.tokenDeCode.email = decode["Email"];
       this.tokenDeCode.userName = decode["UserName"];
+      this.tokenDeCode.roles = JSON.parse(decode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
         return true;
     }
     this.router.navigateByUrl("/login")
